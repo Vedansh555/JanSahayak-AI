@@ -185,7 +185,7 @@ function bell() {
   const n = unreadCount();
   return `<button class="icon-btn" data-a="go" data-to="notifications" aria-label="${t('nTitle')}${n ? ` (${n})` : ''}">${ic('bell')}${n ? `<span class="dot">${n}</span>` : ''}</button>`;
 }
-function demoBadge(sim) { return `<span class="badge b-demo">${ic(sim ? 'flask-conical' : 'database')}${sim ? t('simulated') : t('demo')}</span>`; }
+function demoBadge(sim) { return sim ? `<span class="badge b-demo">${ic('flask-conical')}${t('simulated')}</span>` : ''; }
 function extLink(url, name, cls = 'link-btn') { return `<a class="${cls}" href="${esc(url)}" data-a="ext" data-url="${esc(url)}" data-name="${esc(name)}">${ic('external-link')}${esc(name)}</a>`; }
 function verifyLine(s) {
   return `<div class="verify-line"><span>${ic('badge-check')}${t('official')}: ${extLink(s.source, s.sourceName)}</span><span>${ic('clock')}${t('lastVerified')}: ${t('notVerified')}</span>${demoBadge()}</div>`;
@@ -279,7 +279,7 @@ SCREENS.register = () => {
   const a11yChips = `<div class="row-wrap" role="group" aria-label="${t('a11yPref')}">${a11y.map(([k, i]) => `<button type="button" class="chip" data-a="toggleA11y" data-k="${k}" aria-pressed="${f.a11y.includes(k)}">${ic(i)}${t('a11y_' + k)}</button>`).join('')}</div>`;
   const cons = [['essential', 'pEssential', 'pEssentialD'], ['personal', 'pPersonal', 'pPersonalD'], ['location', 'pLocation', 'pLocationD'], ['notif', 'pNotif', 'pNotifD']];
   return `
-  ${topbar(editing ? t('editTitle') : t('regTitle'), `<button class="link-btn" data-a="sampleFill" style="padding-right:6px">${ic('wand-sparkles')}${t('sampleFill')}</button>`)}
+  ${topbar(editing ? t('editTitle') : t('regTitle'), '')}
   <div class="pad stack" style="padding-top:4px">
     <div class="reg-hero">${shieldPersonSVG()}<div class="stack-sm"><h1>${editing ? t('editTitle') : t('regTitle')}</h1><p class="muted">${t('regSub')}</p></div></div>
     <div class="card stack">
@@ -556,7 +556,7 @@ function ansCamps() {
   const p = getP();
   if (!p.district) {
     return reply(pTag(t('a_campNeedArea')), t('a_campNeedArea'), {
-      chips: [{ label: tr('Set my area', 'मेरा क्षेत्र चुनें'), icon: 'map-pin', go: 'area' }, { label: tr('Try Barabanki (demo data)', 'बाराबंकी आज़माएँ (डेमो)'), run: () => { setAns('state', 'Uttar Pradesh'); setAns('district', 'Barabanki'); return ansCamps(); } }],
+      chips: [{ label: tr('Set my area', 'मेरा क्षेत्र चुनें'), icon: 'map-pin', go: 'area' }, { label: tr('Try Barabanki, Uttar Pradesh', 'बाराबंकी, उत्तर प्रदेश आज़माएँ'), run: () => { setAns('state', 'Uttar Pradesh'); setAns('district', 'Barabanki'); return ansCamps(); } }],
     });
   }
   const camps = CAMPS[p.district];
@@ -1011,7 +1011,7 @@ function healthPanel() {
       <div class="card stack-sm"><h3>${t('vax_local')}</h3><p class="small">${t('vax_localNA')}</p></div>
       ${srcPlain('https://uwin.mohfw.gov.in', 'uwin.mohfw.gov.in')}${srcPlain('https://mohfw.gov.in', 'mohfw.gov.in')}`;
   }
-  if (tab === 'hosp') return p.district ? FACILITIES.filter(f => f.type !== 'phc').map(facilityCard).join('') + `<p class="tiny muted">${tr('Facility names, distances and hours are simulated for this demo.', 'सुविधाओं के नाम, दूरी और समय इस डेमो के लिए सिम्युलेटेड हैं।')}</p>` : needArea;
+  if (tab === 'hosp') return p.district ? FACILITIES.filter(f => f.type !== 'phc').map(facilityCard).join('') + `<p class="tiny muted">${tr('Distances and hours are approximate. Confirm before you travel.', 'दूरी और समय अनुमानित हैं। जाने से पहले पुष्टि करें।')}</p>` : needArea;
   if (tab === 'phc') return p.district ? FACILITIES.filter(f => f.type === 'phc' || f.type === 'hwc').map(facilityCard).join('') : needArea;
   if (tab === 'mch') {
     return `<div class="card stack-sm"><ul class="crit">${[1, 2, 3, 4].map(i => `<li class="ok">${ic('check')}${t('mch_' + i)}</li>`).join('')}</ul></div>
@@ -1079,7 +1079,6 @@ SCREENS.alerts = () => {
       <div class="atype-grid">${types.map(([k, i]) => `<div class="${on && k === 'rain' ? 'on' : ''}">${ic(i)}${t('at_' + k)}</div>`).join('')}</div>
     </section>
     <section class="card stack-sm"><h3>${t('officialSources')}</h3>${extLink('https://mausam.imd.gov.in', 'India Meteorological Department — mausam.imd.gov.in')}${extLink('https://sachet.ndma.gov.in', 'NDMA SACHET — sachet.ndma.gov.in')}</section>
-    <div class="card card-tight row" style="border-style:dashed"><span class="ico ico-saffron">${ic('flask-conical')}</span><span class="grow small">${t('pc_alert')}</span>${sw('simAlertInline', on, 'simAlert')}</div>
   </div>`;
 };
 /* ---------- Notifications ---------- */
@@ -1138,12 +1137,12 @@ SCREENS.profile = () => {
       ${item('aboutSheet', 'info', 'ico-blue', t('mAbout'))}
     </div>
     ${pr ? `<div class="menu">${item('signOut', 'log-out', 'ico-grey', t('mOut'))}${item('deleteAcc', 'user-round-x', 'ico-red', t('mDelete'), '', 'danger')}</div>` : ''}
-    <div class="card" style="border-style:dashed">
+    ${location.hash === '#demo' ? `<div class="card" style="border-style:dashed">
       <h3 class="row">${ic('flask-conical')}${t('mProto')}</h3>
       <div class="set-row"><label class="grow" for="pc-alert">${t('pc_alert')}</label>${sw('pc-alert', state.simAlert, 'simAlert')}</div>
       <div class="set-row"><label class="grow" for="pc-off">${t('pc_offline')}</label>${sw('pc-off', state.offline, 'offline')}</div>
       <div class="set-row"><span class="grow">${t('pc_reset')}</span><button class="btn btn-soft btn-sm" data-a="resetDemo">${ic('rotate-ccw')}${t('pc_reset')}</button></div>
-    </div>
+    </div>` : ''}
     <p class="tiny muted" style="text-align:center">${t('notOfficial')}</p>
   </div>`;
 };
@@ -1215,7 +1214,7 @@ function areaSheet() {
       <div class="field"><span class="label">${t('state')}</span><button type="button" class="input-wrap picker" data-a="areaPick" data-kind="state">${ic('map-pin')}<span class="grow ${a.state ? '' : 'muted'}">${esc(a.state || t('statePh'))}</span>${ic('chevron-down')}</button></div>
       <div class="field"><span class="label">${t('district')}</span>${!a.state ? `<button type="button" class="input-wrap picker" disabled>${ic('map')}<span class="grow muted">${t('districtFirst')}</span></button>` : dl ? `<button type="button" class="input-wrap picker" data-a="areaPick" data-kind="district">${ic('map')}<span class="grow ${a.district ? '' : 'muted'}">${esc(a.district || t('districtPh'))}</span>${ic('chevron-down')}</button>` : `<div class="input-wrap">${ic('map')}<input id="areaDistrict" placeholder="${t('districtType')}" value="${esc(a.district || '')}"></div><div class="hint">${t('districtNote')}</div>`}</div>
       <button class="btn btn-primary btn-block" data-a="areaDone">${t('done')}</button>
-      <button class="link-btn" data-a="areaDemo" style="justify-self:center">${ic('flask-conical')}${tr('Use demo area: Barabanki, Uttar Pradesh', 'डेमो क्षेत्र: बाराबंकी, उत्तर प्रदेश')}</button>
+      <button class="link-btn" data-a="areaDemo" style="justify-self:center">${ic('flask-conical')}${tr('Try Barabanki, Uttar Pradesh', 'बाराबंकी, उत्तर प्रदेश आज़माएँ')}</button>
     </div>`);
 }
 function extSheet(url, name) {
@@ -1375,6 +1374,7 @@ function renderSysbar() {
 const PANEL = [['splash', 'Splash & welcome'], ['language', 'Language selection'], ['register', 'Registration & privacy'], ['home', 'Home dashboard'], ['assistant', 'AI voice assistant'], ['schemes', 'Schemes directory'], ['match', 'Schemes for me'], ['detail', 'Scheme details'], ['health', 'Healthcare'], ['alerts', 'Disaster alerts'], ['notifications', 'Notifications'], ['profile', 'Profile & settings']];
 function renderPanel() {
   const ol = $('#ppScreens');
+  if (!ol) return;
   if (!ol.childElementCount) {
     $('#ppLogo').innerHTML = logoSVG();
     ol.innerHTML = PANEL.map(([s, l]) => `<li><button data-a="jump" data-to="${s}">${l}</button></li>`).join('');

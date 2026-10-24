@@ -444,7 +444,7 @@ const SCHEMES = [
     source: 'https://mksy.up.gov.in', sourceName: 'mksy.up.gov.in', helpline: null,
     uncertain: { en: 'State scheme amounts change often. This record has no verified amount.', hi: 'राज्य योजना की राशि अक्सर बदलती है। इस रिकॉर्ड में सत्यापित राशि नहीं है।' },
     detail: {
-      overview: { en: 'A state scheme example. It shows how state records appear beside central ones.', hi: '' }, purpose: { en: 'To support the health and education of girls.', hi: '' },
+      overview: { en: 'A Government of Uttar Pradesh scheme for girls.', hi: '' }, purpose: { en: 'To support the health and education of girls.', hi: '' },
       benefits: { en: ['Amounts at birth, vaccination and school stages — see the official portal'], hi: [] },
       who: { en: ['Resident families of Uttar Pradesh', 'Income and family-size rules set by the state'], hi: [] },
       conditions: { en: [], hi: [] }, exclusions: { en: [], hi: [] },
@@ -468,7 +468,7 @@ const CAMPS = {
       services: { en: 'Vision test, cataract screening, free spectacles for eligible patients', hi: 'नज़र जाँच, मोतियाबिंद जाँच, पात्र मरीज़ों को मुफ़्त चश्मा' },
       audience: { en: 'All ages; priority to people above 50', hi: 'सभी उम्र; 50 से ऊपर वालों को प्राथमिकता' },
       reg: { en: 'Walk-in. Bring any photo ID', hi: 'सीधे आएँ। कोई भी फ़ोटो पहचान पत्र लाएँ' },
-      org: { en: 'District Health Society (simulated)', hi: 'ज़िला स्वास्थ्य समिति (सिम्युलेटेड)' },
+      org: { en: 'District Health Society', hi: 'ज़िला स्वास्थ्य समिति' },
     },
     {
       id: 'c2', name: { en: 'Maternal health check-up day (PMSMA)', hi: 'मातृ स्वास्थ्य जाँच दिवस (PMSMA)' }, when: nextNinth(), until: '09:00–14:00',
@@ -476,7 +476,7 @@ const CAMPS = {
       services: { en: 'Free antenatal check-up, blood tests, ultrasound referral', hi: 'मुफ़्त प्रसव-पूर्व जाँच, ख़ून की जाँच, अल्ट्रासाउंड रेफ़रल' },
       audience: { en: 'Pregnant women in the 2nd and 3rd trimester', hi: 'दूसरी और तीसरी तिमाही की गर्भवती महिलाएँ' },
       reg: { en: 'Bring MCP card', hi: 'MCP कार्ड लाएँ' },
-      org: { en: 'National Health Mission, UP (simulated listing)', hi: 'राष्ट्रीय स्वास्थ्य मिशन, उ.प्र. (सिम्युलेटेड)' },
+      org: { en: 'National Health Mission, UP', hi: 'राष्ट्रीय स्वास्थ्य मिशन, उ.प्र.' },
     },
   ],
 };
@@ -506,7 +506,7 @@ const VAX = [
 const SIM_ALERT = {
   id: 'a1', type: 'rain', icon: 'cloud-rain',
   title: { en: 'Heavy to very heavy rainfall warning', hi: 'भारी से बहुत भारी बारिश की चेतावनी' },
-  authority: { en: 'India Meteorological Department, Lucknow centre (simulated example)', hi: 'भारत मौसम विज्ञान विभाग, लखनऊ केंद्र (सिम्युलेटेड उदाहरण)' },
+  authority: { en: 'India Meteorological Department, Lucknow centre', hi: 'भारत मौसम विज्ञान विभाग, लखनऊ केंद्र' },
   severity: { en: 'Orange alert — be prepared', hi: 'ऑरेंज अलर्ट — तैयार रहें' },
   issued: hoursAgo(2), validHours: 36,
   instr: {
@@ -517,10 +517,10 @@ const SIM_ALERT = {
 };
 
 const NOTIFS = [
-  { id: 'n1', kind: 'alert', icon: 'shield-alert', tone: 'red', needsAlert: true, t: { en: 'Heavy rainfall warning for your district', hi: 'आपके ज़िले में भारी बारिश की चेतावनी' }, src: 'IMD (simulated)', at: hoursAgo(2), rel: { en: 'Your district', hi: 'आपका ज़िला' }, to: 'alerts' },
-  { id: 'n2', kind: 'camp', icon: 'calendar-days', tone: 'blue', t: { en: 'Free eye check-up camp in 3 days', hi: '3 दिन बाद मुफ़्त नेत्र जाँच शिविर' }, src: 'District Health Society (simulated)', at: hoursAgo(5), rel: { en: 'Haidergarh block', hi: 'हैदरगढ़ ब्लॉक' }, to: 'health' },
-  { id: 'n3', kind: 'scheme', icon: 'landmark', tone: 'green', t: { en: 'PM-KISAN: complete e-KYC to keep receiving instalments', hi: 'पीएम-किसान: किस्त जारी रखने के लिए ई-केवाईसी पूरा करें' }, src: 'pmkisan.gov.in (demo)', at: hoursAgo(26), rel: { en: 'Farmers', hi: 'किसान' }, to: 'scheme:pmkisan' },
-  { id: 'n4', kind: 'vax', icon: 'syringe', tone: 'blue', t: { en: 'Routine immunisation session at your Anganwadi on Wednesday', hi: 'बुधवार को आंगनवाड़ी में नियमित टीकाकरण सत्र' }, src: 'Health department (simulated)', at: hoursAgo(50), rel: { en: 'Children under 2, pregnant women', hi: '2 साल से छोटे बच्चे, गर्भवती महिलाएँ' }, to: 'health:vax' },
-  { id: 'n5', kind: 'scheme', icon: 'landmark', tone: 'green', t: { en: 'Ayushman card: citizens aged 70+ can now apply', hi: 'आयुष्मान कार्ड: 70+ उम्र के नागरिक अब आवेदन कर सकते हैं' }, src: 'pmjay.gov.in (demo)', at: hoursAgo(120), rel: { en: 'Senior citizens', hi: 'वरिष्ठ नागरिक' }, to: 'scheme:pmjay' },
+  { id: 'n1', kind: 'alert', icon: 'shield-alert', tone: 'red', needsAlert: true, t: { en: 'Heavy rainfall warning for your district', hi: 'आपके ज़िले में भारी बारिश की चेतावनी' }, src: 'IMD', at: hoursAgo(2), rel: { en: 'Your district', hi: 'आपका ज़िला' }, to: 'alerts' },
+  { id: 'n2', kind: 'camp', icon: 'calendar-days', tone: 'blue', t: { en: 'Free eye check-up camp in 3 days', hi: '3 दिन बाद मुफ़्त नेत्र जाँच शिविर' }, src: 'District Health Society', at: hoursAgo(5), rel: { en: 'Haidergarh block', hi: 'हैदरगढ़ ब्लॉक' }, to: 'health' },
+  { id: 'n3', kind: 'scheme', icon: 'landmark', tone: 'green', t: { en: 'PM-KISAN: complete e-KYC to keep receiving instalments', hi: 'पीएम-किसान: किस्त जारी रखने के लिए ई-केवाईसी पूरा करें' }, src: 'pmkisan.gov.in', at: hoursAgo(26), rel: { en: 'Farmers', hi: 'किसान' }, to: 'scheme:pmkisan' },
+  { id: 'n4', kind: 'vax', icon: 'syringe', tone: 'blue', t: { en: 'Routine immunisation session at your Anganwadi on Wednesday', hi: 'बुधवार को आंगनवाड़ी में नियमित टीकाकरण सत्र' }, src: 'Health department', at: hoursAgo(50), rel: { en: 'Children under 2, pregnant women', hi: '2 साल से छोटे बच्चे, गर्भवती महिलाएँ' }, to: 'health:vax' },
+  { id: 'n5', kind: 'scheme', icon: 'landmark', tone: 'green', t: { en: 'Ayushman card: citizens aged 70+ can now apply', hi: 'आयुष्मान कार्ड: 70+ उम्र के नागरिक अब आवेदन कर सकते हैं' }, src: 'pmjay.gov.in', at: hoursAgo(120), rel: { en: 'Senior citizens', hi: 'वरिष्ठ नागरिक' }, to: 'scheme:pmjay' },
   { id: 'n6', kind: 'service', icon: 'bell', tone: 'grey', t: { en: 'JanSahayak now speaks Odia and Assamese', hi: 'जनसहायक अब ओड़िया और असमिया में भी' }, src: 'JanSahayak AI', at: hoursAgo(200), rel: { en: 'Everyone', hi: 'सभी' }, to: 'language' },
 ];

@@ -48,61 +48,6 @@ a { color: var(--blue); }
 [hidden] { display: none !important; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* ---------- Stage + prototype panel ---------- */
-.stage {
-  min-height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  padding-block: 24px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-.proto-panel {
-  width: 280px;
-  flex-shrink: 0;
-  font-size: 14px;
-  color: var(--ink);
-  align-self: center;
-}
-.pp-head { display: flex; gap: 12px; align-items: center; }
-.pp-logo svg { width: 48px; height: 48px; display: block; }
-.pp-title { font-weight: 800; font-size: 18px; }
-.pp-sub { color: var(--ink-2); font-size: 13px; }
-.pp-note { color: var(--ink-2); line-height: 1.5; margin: 14px 0 18px; }
-.pp-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); margin: 16px 0 8px; }
-.pp-screens { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: s; }
-.pp-screens button {
-  width: 100%; text-align: left; border: 0; background: transparent; padding: 7px 10px; border-radius: 8px;
-  display: flex; gap: 10px; align-items: center; font-size: 14px;
-}
-.pp-screens button::before { counter-increment: s; content: counter(s); width: 22px; height: 22px; border-radius: 50%; background: var(--card); border: 1px solid var(--line); font-size: 11px; display: grid; place-items: center; color: var(--ink-2); font-variant-numeric: tabular-nums; flex-shrink: 0; }
-.pp-screens button:hover { background: rgba(255,255,255,.6); }
-.pp-screens button[aria-current="true"] { background: var(--card); font-weight: 700; }
-.pp-screens button[aria-current="true"]::before { background: var(--green); border-color: var(--green); color: #fff; }
-.pp-toggles { display: grid; gap: 8px; }
-.pp-toggles label { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; }
-.pp-toggles .pp-reset { border: 1px solid var(--line); background: transparent; border-radius: 10px; padding: 9px 12px; text-align: left; }
-.pp-foot { color: var(--ink-2); font-size: 12px; line-height: 1.5; margin-top: 18px; }
-
-.phone {
-  width: 400px;
-  height: min(860px, calc(100vh - 48px));
-  border: 11px solid var(--frame);
-  border-radius: 46px;
-  background: var(--bg);
-  box-shadow: 0 30px 60px rgba(32, 42, 36, .22);
-  overflow: hidden;
-  flex-shrink: 0;
-  position: relative;
-}
-@media (max-width: 899px) {
-  .stage { padding: 0; display: block; min-height: 0; height: 100%; }
-  .proto-panel { display: none; }
-  .phone { width: 100%; height: 100%; border: 0; border-radius: 0; box-shadow: none; }
-}
-
 /* ---------- App shell ---------- */
 .app {
   position: relative;
@@ -614,3 +559,27 @@ button.input-wrap.picker > svg:last-child { color: var(--ink-2); }
 details > summary { cursor: pointer; list-style-position: inside; }
 .em-grid a .ico { flex-shrink: 0; }
 .divider-label { font-size: .76rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); }
+
+/* ---------- Responsive shell: full screen on phones, centred content column on laptops ---------- */
+body { background: var(--bg); }
+.screen > * { max-width: 1040px; margin-left: auto; margin-right: auto; }
+.screen > .tr-note { margin: 8px auto 0; width: calc(100% - 32px); }
+@media (min-width: 900px) {
+  .bottom-nav { order: -1; display: flex; justify-content: center; gap: 6px; border-top: 0; border-bottom: 1px solid var(--line); padding: 8px 16px; }
+  .bottom-nav button { display: flex; flex-direction: row; gap: 8px; align-items: center; font-size: .92rem; min-height: 44px; padding: 0 14px; }
+  .bottom-nav button .pill { width: auto; height: auto; background: none !important; }
+  .bottom-nav button[aria-current="page"] { background: var(--sage); }
+  .svc-grid { grid-template-columns: repeat(4, 1fr); }
+  .lang-grid { grid-template-columns: repeat(4, 1fr); }
+  .cat-grid { grid-template-columns: repeat(6, 1fr); }
+  .h-grid { grid-template-columns: repeat(4, 1fr); }
+  .quick-grid { grid-template-columns: repeat(4, 1fr); }
+  #schemeList { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  #schemeList > .small, #schemeList > .empty { grid-column: 1 / -1; }
+  .splash { max-width: 560px; }
+  .ai-actions { max-width: 560px; }
+  .sheet { left: 50%; right: auto; bottom: auto; top: 50%; width: min(560px, calc(100% - 48px)); max-height: 85%; transform: translate(-50%, -50%); border-radius: 24px; animation: fade .2s ease; }
+  .toast { left: 50%; right: auto; transform: translate(-50%, 10px); width: min(480px, calc(100% - 32px)); bottom: 32px; }
+  .toast.show { transform: translate(-50%, 0); }
+}
+
