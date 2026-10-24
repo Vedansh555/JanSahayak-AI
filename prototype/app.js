@@ -117,53 +117,52 @@ function visibleNotifs() { return NOTIFS.filter(n => !n.needsAlert || state.simA
 
 /* ---------- Brand art ---------- */
 function logoSVG() {
+  // Speech bubble (the assistant) holding a village house; saffron dot = the sun / the AI spark.
   return `<svg viewBox="0 0 96 96" role="img" aria-label="JanSahayak AI logo">
-    <rect x="2" y="2" width="92" height="92" rx="26" fill="#246B45"/>
-    <path d="M14 48 L40 26 L66 48" fill="none" stroke="#FFF8EC" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M21 43 V74 H59 V43" fill="none" stroke="#FFF8EC" stroke-width="5" stroke-linejoin="round"/>
-    <circle cx="33" cy="54" r="4.6" fill="#F39A36"/><path d="M25.5 72 q7.5 -13 15 0z" fill="#F39A36"/>
-    <circle cx="47" cy="54" r="4.6" fill="#FFF8EC"/><path d="M39.5 72 q7.5 -13 15 0z" fill="#FFF8EC"/>
-    <path d="M64 13 h18 a6 6 0 0 1 6 6 v9 a6 6 0 0 1 -6 6 h-9 l-6 6 v-6 h-3 a6 6 0 0 1 -6 -6 v-9 a6 6 0 0 1 6 -6z" fill="#F39A36"/>
-    <circle cx="67" cy="23.5" r="2.2" fill="#246B45"/><circle cx="73" cy="23.5" r="2.2" fill="#246B45"/><circle cx="79" cy="23.5" r="2.2" fill="#246B45"/>
-    <path d="M68 80 c0 -11 8 -18 18 -18 c0 11 -7 18 -18 18z" fill="#E5EFE5"/><path d="M69 79 l11 -11" stroke="#246B45" stroke-width="2" stroke-linecap="round"/>
+    <rect width="96" height="96" rx="26" fill="#246B45"/>
+    <path d="M24 20 h48 a12 12 0 0 1 12 12 v24 a12 12 0 0 1 -12 12 H46 l-13 11 a2 2 0 0 1 -3.3 -1.5 V68 H24 a12 12 0 0 1 -12 -12 V32 a12 12 0 0 1 12 -12z" fill="#FFF8EC"/>
+    <path d="M33 47 L48 35 L63 47" fill="none" stroke="#246B45" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M37.5 44.5 V58 H58.5 V44.5" fill="none" stroke="#246B45" stroke-width="5" stroke-linejoin="round"/>
+    <rect x="44.5" y="50" width="7" height="8" rx="1.5" fill="#F39A36"/>
+    <circle cx="71" cy="31" r="5" fill="#F39A36"/>
   </svg>`;
 }
 function figure(x, o) {
   const y = 150;
-  let s = `<rect x="${x - 7}" y="${y - 22}" width="5" height="22" rx="2" fill="#3B4740"/><rect x="${x + 2}" y="${y - 22}" width="5" height="22" rx="2" fill="#3B4740"/>`;
-  s += `<path d="M${x - 12} ${y - 20} q0 -30 12 -32 q12 2 12 32z" fill="${o.body}"/>`;
-  s += `<circle cx="${x}" cy="${y - 60}" r="8" fill="#B87B4B"/>`;
-  if (o.hat) s += `<path d="M${x - 9} ${y - 62} q9 -12 18 0 q-9 3 -18 0z" fill="${o.hat}"/>`;
-  if (o.hair) s += `<path d="M${x - 8} ${y - 61} q8 -13 16 0 q-2 -6 -8 -6 q-6 0 -8 6z" fill="${o.hair}"/>`;
-  if (o.bun) s += `<circle cx="${x + 7}" cy="${y - 64}" r="4" fill="#2B2B2B"/>`;
-  if (o.drape) s += `<path d="M${x - 12} ${y - 22} q4 -22 18 -30 l4 6 q-12 8 -14 24z" fill="${o.drape}"/>`;
-  if (o.stick) s += `<line x1="${x + 16}" y1="${y - 52}" x2="${x + 16}" y2="${y}" stroke="#8A5A2B" stroke-width="3" stroke-linecap="round"/>`;
-  if (o.cane) s += `<path d="M${x - 16} ${y} V${y - 34} q0 -5 5 -5" fill="none" stroke="#8A5A2B" stroke-width="3" stroke-linecap="round"/>`;
-  if (o.phone) s += `<rect x="${x + 4}" y="${y - 44}" width="8" height="12" rx="2" fill="#FFF8EC" stroke="#202A24" stroke-width="1.2"/><path d="M${x + 16} ${y - 46} q4 4 0 8 M${x + 19} ${y - 49} q7 7 0 14" fill="none" stroke="#F39A36" stroke-width="2" stroke-linecap="round"/>`;
+  let s = `<rect x="${x - 11}" y="${y - 44}" width="22" height="44" rx="11" fill="${o.body}"/>`;
+  if (o.drape) s += `<path d="M${x - 11} ${y - 22} L${x + 11} ${y - 38} L${x + 11} ${y - 28} L${x - 11} ${y - 12}z" fill="${o.drape}"/>`;
+  s += `<circle cx="${x}" cy="${y - 55}" r="8.5" fill="${o.skin || '#B97D4F'}"/>`;
+  if (o.cap) s += `<path d="M${x - 9} ${y - 56} a9 9 0 0 1 18 0z" fill="${o.cap}"/>`;
+  if (o.bun) s += `<circle cx="${x + 7}" cy="${y - 61}" r="4" fill="${o.cap}"/>`;
+  if (o.stick) s += `<line x1="${x + 18}" y1="${y - 50}" x2="${x + 18}" y2="${y}" stroke="#7A5230" stroke-width="3" stroke-linecap="round"/>`;
+  if (o.cane) s += `<path d="M${x - 18} ${y} V${y - 30} a5 5 0 0 1 5 -5" fill="none" stroke="#7A5230" stroke-width="3" stroke-linecap="round"/>`;
+  if (o.phone) s += `<rect x="${x + 5}" y="${y - 40}" width="9" height="14" rx="2.5" fill="#FFF8EC" stroke="#202A24" stroke-width="1.4"/><path d="M${x + 19} ${y - 40} a6 6 0 0 1 0 9 M${x + 23} ${y - 44} a11 11 0 0 1 0 17" fill="none" stroke="#F39A36" stroke-width="2.2" stroke-linecap="round"/>`;
   return s;
+}
+function house(x, y, w, door) {
+  const h = w * 0.62, r = w * 0.5;
+  return `<path d="M${x - 6} ${y} L${x + r} ${y - r * 0.72} L${x + w + 6} ${y}z" fill="#246B45"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#FFFFFF"/><rect x="${x + w / 2 - 5}" y="${y + h - 15}" width="10" height="15" rx="2" fill="${door}"/>`;
 }
 function villageArt() {
   return `<svg class="village-art" viewBox="0 0 330 170" role="img" aria-label="A farmer, an older man, a woman and a young person using a phone, standing in a village">
-    <circle cx="272" cy="38" r="20" fill="#F39A36" opacity=".85"/>
-    <path d="M0 118 Q80 82 170 110 T330 98 V170 H0Z" fill="#D3E4D4"/>
-    <path d="M0 142 Q110 120 220 138 T330 132 V170 H0Z" fill="#BCD6BF"/>
-    <path d="M16 92 L42 72 L68 92Z" fill="#246B45"/><rect x="22" y="92" width="40" height="26" fill="#FFFFFF" stroke="#246B45" stroke-width="2"/><rect x="37" y="102" width="10" height="16" fill="#F39A36"/>
-    <path d="M262 98 L286 80 L310 98Z" fill="#246B45"/><rect x="268" y="98" width="36" height="22" fill="#FFFFFF" stroke="#246B45" stroke-width="2"/><rect x="281" y="106" width="9" height="14" fill="#2463A6"/>
-    <rect x="236" y="96" width="4" height="22" fill="#8A5A2B"/><circle cx="238" cy="88" r="13" fill="#246B45" opacity=".85"/>
-    ${figure(108, { body: '#246B45', hat: '#F39A36', stick: true })}
-    ${figure(150, { body: '#FFFFFF', hair: '#D7DCD8', cane: true })}
-    ${figure(192, { body: '#F39A36', bun: true, hair: '#2B2B2B', drape: '#C86F12' })}
-    ${figure(232, { body: '#2463A6', hair: '#2B2B2B', phone: true })}
+    <circle cx="268" cy="44" r="18" fill="#F39A36"/>
+    <path d="M0 116 C70 92 130 98 180 110 S280 104 330 94 V170 H0Z" fill="#D3E4D4"/>
+    <path d="M0 146 C90 128 200 132 330 140 V170 H0Z" fill="#BCD6BF"/>
+    ${house(22, 98, 40, '#F39A36')}
+    ${house(270, 102, 36, '#2463A6')}
+    <circle cx="246" cy="96" r="12" fill="#2F7A50"/><rect x="244.5" y="104" width="3" height="16" rx="1.5" fill="#7A5230"/>
+    ${figure(106, { body: '#246B45', cap: '#F39A36', stick: true })}
+    ${figure(148, { body: '#FFFFFF', cap: '#D7DCD8', cane: true, skin: '#A8714A' })}
+    ${figure(190, { body: '#F39A36', drape: '#C8701A', cap: '#2B2B2B', bun: true })}
+    ${figure(230, { body: '#2463A6', cap: '#2B2B2B', phone: true, skin: '#A8714A' })}
   </svg>`;
 }
 function botSVG(cls = 'bot') {
+  // Assistant mark: the logo's speech bubble with "typing" dots.
   return `<svg class="${cls}" viewBox="0 0 64 64" aria-hidden="true">
-    <circle cx="32" cy="32" r="30" fill="#FFFFFF"/>
-    <rect x="14" y="18" width="36" height="28" rx="12" fill="#246B45"/>
-    <circle cx="25" cy="31" r="3.4" fill="#FFF8EC"/><circle cx="39" cy="31" r="3.4" fill="#FFF8EC"/>
-    <path d="M26 38 q6 4 12 0" fill="none" stroke="#F39A36" stroke-width="2.6" stroke-linecap="round"/>
-    <line x1="32" y1="18" x2="32" y2="11" stroke="#246B45" stroke-width="2.6"/><circle cx="32" cy="9" r="3" fill="#F39A36"/>
-    <path d="M6 28 v8 M58 28 v8" stroke="#2463A6" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="32" cy="32" r="32" fill="#246B45"/>
+    <path d="M17 18 h30 a7 7 0 0 1 7 7 v13 a7 7 0 0 1 -7 7 H31 l-8 7 v-7 h-6 a7 7 0 0 1 -7 -7 V25 a7 7 0 0 1 7 -7z" fill="#FFF8EC"/>
+    <circle cx="23.5" cy="31.5" r="3" fill="#246B45"/><circle cx="32" cy="31.5" r="3" fill="#246B45"/><circle cx="40.5" cy="31.5" r="3" fill="#F39A36"/>
   </svg>`;
 }
 function shieldPersonSVG() {
@@ -209,7 +208,6 @@ SCREENS.splash = () => `
   <div class="splash">
     <div class="blob" style="width:260px;height:260px;top:-90px;right:-110px"></div>
     <div class="blob" style="width:180px;height:180px;bottom:120px;left:-90px;opacity:.7"></div>
-    <div class="splash-top">${langPill()}</div>
     <div class="splash-hero">
       <div class="splash-logo">${logoSVG()}</div>
       <div class="splash-name">JanSahayak <span class="ai">AI</span></div>
@@ -223,7 +221,7 @@ SCREENS.splash = () => `
       <div class="small muted">${t('voiceReady')}</div>
     </div>
     <div class="splash-actions">
-      <button class="btn btn-primary btn-block" data-a="go" data-to="language">${t('getStarted')}${ic('arrow-right')}</button>
+      <button class="btn btn-primary btn-block" data-a="getStarted">${t('getStarted')}${ic('arrow-right')}</button>
       <button class="btn btn-secondary btn-block" data-a="go" data-to="language">${ic('languages')}${t('chooseLanguage')}</button>
     </div>
     <p class="splash-legal">${t('notOfficial')}</p>
@@ -1441,8 +1439,10 @@ const ACT = {
   },
   langFallback: el => { state.prefLang = el.dataset.code; state.lang = 'en'; UI.pendingLang = el.dataset.code; closeSheet(); rerenderKeepScroll(); },
   sample: el => { const l = curLang(el.dataset.code); speak(l.greet, l.bcp); },
+  getStarted: () => { if (state.profile) { state.langChosen = true; tab('home'); } else go('register'); },
   langContinue: () => {
-    state.langChosen = true; UI.pendingLang = null;
+    state.langChosen = true; UI.pendingLang = null; UI.langPicked = true;
+    if (UI.langNext) { const to = UI.langNext; UI.langNext = null; tab(to); return; }
     if (UI.hist.length && UI.hist[UI.hist.length - 1] !== 'splash') { back(); return; }
     UI.hist = ['language'];
     state.screen = state.profile ? 'home' : 'register';
@@ -1528,10 +1528,12 @@ const ACT = {
     state.profile.name = f.name.trim();
     state.langChosen = true; UI.editing = false;
     if (wasEditing) { toast(t('saved')); back(); return; }
-    UI.hist = []; state.screen = 'home'; render(); $('#screen').scrollTop = 0;
+    UI.hist = [];
+    if (UI.langPicked) { state.screen = 'home'; } else { UI.langNext = 'home'; state.screen = 'language'; }
+    render(); $('#screen').scrollTop = 0;
     toast(t('welcomeDone', { name: state.profile.name.split(/\s+/)[0] }));
   },
-  skipReg: () => { state.langChosen = true; UI.errors = {}; tab('home'); },
+  skipReg: () => { UI.errors = {}; if (UI.langPicked) { state.langChosen = true; tab('home'); return; } UI.langNext = 'home'; UI.hist = []; state.screen = 'language'; render(); $('#screen').scrollTop = 0; },
   editProfile: () => { state.form = JSON.parse(JSON.stringify(state.profile)); UI.editing = true; UI.errors = {}; go('register'); },
 
   micFromHome: () => { go('assistant'); micTap(); },
