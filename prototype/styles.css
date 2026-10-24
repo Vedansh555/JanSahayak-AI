@@ -256,7 +256,9 @@ p { margin: 0; }
 .splash .blob { position: absolute; border-radius: 50%; background: var(--sage); z-index: 0; }
 .splash > * { position: relative; z-index: 1; }
 .splash-top { display: flex; justify-content: flex-end; }
-.splash-hero { flex: 1; display: grid; justify-items: center; align-content: center; gap: 14px; text-align: center; padding: 8px 0 20px; }
+.splash-hero { display: grid; justify-items: center; align-content: center; gap: 14px; text-align: center; padding: 8px 0 4px; }
+.splash-art { display: flex; justify-content: center; flex: 1; align-items: center; padding: 8px 0; }
+.splash-voice { display: grid; justify-items: center; gap: 8px; text-align: center; padding-bottom: 20px; }
 .splash-logo svg { width: 92px; height: 92px; display: block; animation: breathe 3s ease-in-out 1; }
 .splash-name { font-size: 2rem; font-weight: 800; letter-spacing: -.01em; color: var(--green-deep); }
 .splash-name .ai { color: var(--saffron); }
@@ -576,7 +578,18 @@ body { background: var(--bg); }
   .quick-grid { grid-template-columns: repeat(4, 1fr); }
   #schemeList { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
   #schemeList > .small, #schemeList > .empty { grid-column: 1 / -1; }
-  .splash { max-width: 560px; }
+  .splash { max-width: 1120px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); grid-template-areas: "top top" "hero art" "voice art" "actions art" "legal art"; column-gap: 64px; align-content: center; padding: 32px 48px; }
+  .splash-top { grid-area: top; }
+  .splash-hero { grid-area: hero; justify-items: start; text-align: left; padding-top: 0; }
+  .splash-voice { grid-area: voice; justify-items: start; text-align: left; }
+  .splash-actions { grid-area: actions; grid-template-columns: 1fr 1fr; }
+  .splash-legal { grid-area: legal; text-align: left; }
+  .splash-art { grid-area: art; align-self: center; background: var(--sage); border-radius: 32px; padding: 40px 24px; }
+  .splash-art .village-art { max-width: 520px; }
+  .splash-name { font-size: 3rem; }
+  .splash-logo svg { width: 84px; height: 84px; }
+  .splash-sub { font-size: 1.25rem; }
+  .splash .blob { display: none; }
   .ai-actions { max-width: 560px; }
   .sheet { left: 50%; right: auto; bottom: auto; top: 50%; width: min(560px, calc(100% - 48px)); max-height: 85%; transform: translate(-50%, -50%); border-radius: 24px; animation: fade .2s ease; }
   .toast { left: 50%; right: auto; transform: translate(-50%, 10px); width: min(480px, calc(100% - 32px)); bottom: 32px; }

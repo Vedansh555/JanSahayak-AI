@@ -216,7 +216,9 @@ SCREENS.splash = () => `
       <div class="splash-hi" lang="hi">जनसहायक AI</div>
       <div class="splash-sub">${t('subtitle')}</div>
       <div class="splash-pillars">${t('pillars')}</div>
-      ${villageArt()}
+    </div>
+    <div class="splash-art">${villageArt()}</div>
+    <div class="splash-voice">
       <div class="splash-tag">${ic('mic')}<span>${S.tagline[0]}</span></div>
       <div class="small muted">${t('voiceReady')}</div>
     </div>
